@@ -1,4 +1,4 @@
-# HydroCntrl ![alt text](meikä-removebg-preview.jpg)
+# HydroCntrl ![alt text](res/meikä-removebg-preview.jpg)
 Scalable and opensource hydroponics automation and monitoring platform.
 **HydroCntrl** uses Raspberry pi as an central server so users can plug in IOT nodes for different tasks.
 **HydroCntrl** also provides a web based UI, so users can configure and monitor their systems.
