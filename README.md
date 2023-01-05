@@ -1,21 +1,19 @@
-<img width="200" height = "200" alt = "HydroCntrl logo" src="res/hydroCntrl-logo2.png">
-<strong>Scalable hydroponics automation platform for everyone.</strong>
+![HydroCtrl-logo](https://user-images.githubusercontent.com/68817622/210755586-5aa0ddc7-f66c-4db1-8e68-a135ee4e9bea.png)
 
 ## Pitch
 ### Problem
-<p>Let $G$ be the genetic potential of a strain.</p>
-<p>$E_n(t)$ be a function that describes error of a cultivation variable $n$ at time $t$ compared to absolute optimal.</p>
-<p>Finally let $R$ be the result of the cultivation cycle.</p>
-<p>Then I'm going to state that $R = G - \sum (\int E_n(t) dt)$.</p>
-<p>So the goal of HydroCtrl is to make $R = G$ by minimizing $E_n$ for each n.</p>
+<p>Let $G$ be the genetic potential of a strain.
+$E_n(t)$ be a function that describes error of a cultivation variable $n$ at time $t$ compared to absolute optimal.
+Finally let $R$ be the result of the cultivation cycle.
+Then I'm going to state that $R = G - \sum (\int E_n(t) dt)$.</p>
+<p>Goal of HydroCtrl is to minimize $|R-G|$.</p>
 
 ### Solution
-<strong>Master server and slave iot-node architecture.</strong>
-For each parameter there is a slave node that monitors and controls the parameter according to master.
-User can spesify target values and relations for parameters, such as temperature, humidity, ph and ec.
-Then the user-input is sent to master and master starts informing and monitoring slaves.
-Slaves use basic control algorithms to achieve results that master wants.
-Master dont care how these results are achieved.
+<strong>Extensible iot-nodes based architecture.</strong>
+Every greenhouse is different and have different needs for monitoring and automation.
+HydroCtrl provides a platform where users can select nodes they need and just plug them into the system.
+HydroCtrl is just an API, server and UI. We do provide nodes, but encourage users to create new nodes
+for different purposes and budgets.
 
 
 ## Design
@@ -34,5 +32,6 @@ In practise IOT nodes can do whatever, but from UI they can be configured to do 
 ### UI
 - Dashboard
 - Rule builder/automation editor
+
 
 
