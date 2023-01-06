@@ -1,22 +1,36 @@
-# HydroCntrl <img width="200" height = "200" alt = "HydroCntrl logo" src="res/hydroCntrl-logo.png">
-**HydroCntrl** uses Raspberry pi as an central server so users can plug in IOT nodes for different tasks.
-**HydroCntrl** also provides a web based UI, so users can configure and monitor their systems.
-Our mission is to make advanced hydroponics accessible for everyone.
+![HydroCtrl-logo](https://user-images.githubusercontent.com/68817622/210755586-5aa0ddc7-f66c-4db1-8e68-a135ee4e9bea.png)
+
+## Pitch
+### Problem
+<p>Let $G$ be the genetic potential of a strain.
+$E_n(t)$ be a function that describes error of a cultivation variable $n$ at time $t$ compared to absolute optimal.
+Finally let $R$ be the result of the cultivation cycle.
+Then I'm going to state that $R = G - \sum (\int E_n(t) dt)$.</p>
+<p>Goal of HydroCtrl is to minimize $|R-G|$.</p>
+
+### Solution
+<strong>Extensible iot-nodes based architecture.</strong>
+Every greenhouse is different and have different needs for monitoring and automation.
+HydroCtrl provides a platform where users can select nodes they need and just plug them into the system.
+HydroCtrl is just an API, server and UI. We do provide nodes, but encourage users to create new nodes
+for different purposes and budgets.
 
 ## Design
-HydroCntrl is composed of three main compoments:
+HydroCtrl is composed of three main compoments:
 - Client 
 - Server 
-- Hardware
+- Iot-nodes
 
 ## Capabilities
 In practise IOT nodes can do whatever, but from UI they can be configured to do following things.
-### Automation
+### Nodes
 - Read unlimited number of ph, ec and oxygen sensors.
 - Control unlimited number of pumps, fans and solenoids.
-- Make relations between sensors and devices.
-### Monitoring
-- Log, view and output data. 
-- Stream video from multiple sources.
+### Server
+
+### UI
+- Dashboard
+- Rule builder/automation editor
+
 
 
