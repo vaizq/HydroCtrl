@@ -18,6 +18,15 @@ Automation editor
 Notifications and alerts
 Testing environment for nodes.
 
+## Sensors HydroCtrl can handle
+- Every sensor that's output can be represented as a vector of real numbers
+
+## Devices HydroCtrl can control
+- Lights
+- Pumps
+- Fans
+- Valves
+
 ## Software design
 Use simple object oriented modern c++.
 We use c++ for a number of reasons:
@@ -41,16 +50,9 @@ Error handling is important.
 3. Version control
 
 ## Action steps
-- Start studing about topics you need.
-- Start experimenting
-- Create high-level flow chart and UML diagrams for design. Update as you proceed.
-- Schedule your work.
-- Create project environment for ui, server and nodes
-- Develope the most basic functionality for server and ui
-- Test and refactor
-- Code, refactor and test
-- Create prototype for Jämsä
-- When prototype works, begin funding campaign and start adverticing
-- Start selling
-- Sell to biggest hydroponic farms in the world and do consulting to them
-- Become n.1 in the hydroponics automation industry
+- Start studing about professional software design (concurrent)
+- Create a prototype/MVP (Minimum viable product) 
+- Start testing the prototype in a real environment (concurrent)
+- Design and document final project
+- Start campaigns and adverticing
+- Start buiding the final project

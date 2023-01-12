@@ -1,4 +1,5 @@
 ![HydroCtrl-logo](https://user-images.githubusercontent.com/68817622/210755586-5aa0ddc7-f66c-4db1-8e68-a135ee4e9bea.png)
+HydroCtrl is a distributed system for hydroponics automation.
 
 ## Pitch
 ### Problem

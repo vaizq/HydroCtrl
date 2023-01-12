@@ -16,7 +16,7 @@ function rebuild {
 
 function run {
     build
-    ./build/app 696969 666666
+    ./build/hydroctrl
 }
 
 option=$1
