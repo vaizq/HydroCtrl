@@ -19,6 +19,7 @@ public:
     void stop() { running = false; }
     bool isRunning() { return running; }
 private:
+    void sendDeviceInfo(const std::string& filename);
     void updateNodes();
     void handleGui();
     void renderAll();
@@ -28,6 +29,7 @@ private:
     SDL_Renderer* m_renderer;
     std::unique_ptr<Client> m_client;
 };
+
 
 
 #endif

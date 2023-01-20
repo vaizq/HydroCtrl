@@ -91,6 +91,12 @@ void Application::updateNodes()
         std::cout << "Have received\n";
         auto msg = m_client->popReceived();
         std::cout << "Received: " << msg.payload << '\n';
+
+        // Handle message
+        /*
+        if (msg["type"] == "device_info")
+            addDevice(msg["content"]);
+        */
     }
 }
 

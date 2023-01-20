@@ -32,6 +32,7 @@ public:
         m_ioThread = std::make_unique<std::thread>([this]() {
                 m_io.run();
                 });
+
     }
     ~Client()
     {

@@ -6,6 +6,8 @@
 #include <SDL_render.h>
 #include <SDL2/SDL_image.h>
 #include <fmt/format.h>
+#include <nlohmann/json.hpp>
+#include <fstream>
 #include <iostream>
 #include <functional>
 #include <chrono>
@@ -15,7 +17,13 @@
 #define WINDOW_WIDTH 960
 #define WINDOW_HEIGHT 720
 
+
 constexpr int PORT = 666666;
+
+
+// This is a test PH-sensor node
+
+
 
 
 Application::Application()
@@ -58,6 +66,8 @@ Application::Application()
     // Connect to server
     std::cout << "Connect to server\n";
     m_client = std::make_unique<Client>(std::string("localhost"), PORT);
+
+    sendDeviceInfo("res/deviceinfo.json");
 }
 
 void Application::tick(float targetFps)
@@ -88,11 +98,10 @@ void Application::updateNodes()
 {
     while (m_client->numReceived() > 0)
     {
-        std::cout << "Have received\n";
         auto msg = m_client->popReceived();
-        std::cout << "Received: " << msg.payload << '\n';
     }
 }
+
 
 void Application::handleGui()
 {
@@ -101,19 +110,10 @@ void Application::handleGui()
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
 
-    static bool relayOn = false;
     static float ph = 7.0f;
 
     // Build imgui dashboard
     ImGui::Begin("Dashboard");
-    ImGui::Text("ph %f", 6.5f);
-    if (ImGui::Button(fmt::format("Relay {}", relayOn ? "ON" : "OFF").c_str()))
-    {
-        relayOn = !relayOn;
-
-        Message msg(fmt::format("Set relay {}", relayOn ? "ON" : "OFF"));
-        m_client->send(msg);
-    }
 
     if (ImGui::SliderFloat("PH", &ph, 0, 14))
     {
@@ -140,5 +140,18 @@ Application::~Application()
     SDL_DestroyWindow(m_window);
     SDL_Quit();
 }
+
+void Application::sendDeviceInfo(const std::string& filename)
+{
+    std::ifstream ifs(filename);
+    auto jsonData = nlohmann::json::parse(ifs);
+
+    Message msg(jsonData.dump());
+    m_client->send(msg);
+}
+
+
+
+
 
 

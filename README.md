@@ -1,37 +1,22 @@
+<div align="center">
+  
 ![HydroCtrl-logo](https://user-images.githubusercontent.com/68817622/210755586-5aa0ddc7-f66c-4db1-8e68-a135ee4e9bea.png)
 HydroCtrl is a distributed system for hydroponics automation.
 
-## Pitch
-### Problem
-<p>Let $G$ be the genetic potential of a strain.
-$E_n(t)$ be a function that describes error of a cultivation variable $n$ at time $t$ compared to absolute optimal.
-Finally let $R$ be the result of the cultivation cycle.
-Then I'm going to state that $R = G - \sum (\int E_n(t) dt)$.</p>
-<p>Goal of HydroCtrl is to minimize $|R-G|$.</p>
+##### Open platform for flexible hydroponics automation
+</div>
 
-### Solution
-<strong>Extensible iot-nodes based architecture.</strong>
-Every greenhouse is different and have different needs for monitoring and automation.
-HydroCtrl provides a platform where users can select nodes they need and just plug them into the system.
-HydroCtrl is just an API, server and UI. We do provide nodes, but encourage users to create new nodes
-for different purposes and budgets.
+# HydroCtrl
+HydroCtrl is a open software platform that enables people to build cost effective hydroponics automation and monitoring systems.
+Idea is to provide a server and API so users can create IOT-nodes that senses and controls variables in hydroponics.
+HydroCtrl also provide an UI so users can configure and monitor their systems.
 
-## Design
-HydroCtrl is composed of three main compoments:
-- Client 
-- Server 
-- Iot-nodes
+## User interface
+![UI-example](https://www.trihedral.com/wp-content/uploads/2019/01/VTScada-WWTP-1024x542.png)
 
-## Capabilities
-In practise IOT nodes can do whatever, but from UI they can be configured to do following things.
-### Nodes
-- Read unlimited number of ph, ec and oxygen sensors.
-- Control unlimited number of pumps, fans and solenoids.
-### Server
+## Server
+Just build and run the server in same network as nodes.
 
-### UI
-- Dashboard
-- Rule builder/automation editor
-
-
-
+## IOT-nodes
+We are currently working on creating nodes for the most common tasks.
+Users can create their own nodes using a simple API.

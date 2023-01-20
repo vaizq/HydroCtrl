@@ -1,0 +1,9 @@
+{
+    "type": "device_info",
+    "device": {
+        "type": "sensor",
+        "min_val": 0.0f,
+        "max_val": 14.0f
+        "default_val": 7.0f
+    }
+}
