@@ -57,7 +57,6 @@ Application::Application()
 
     // Connect to server
     std::cout << "Connect to server\n";
-    m_client = std::make_unique<Client>(std::string("localhost"), PORT);
 }
 
 void Application::tick(float targetFps)
@@ -86,18 +85,6 @@ void Application::tick(float targetFps)
 
 void Application::updateNodes()
 {
-    while (m_client->numReceived() > 0)
-    {
-        std::cout << "Have received\n";
-        auto msg = m_client->popReceived();
-        std::cout << "Received: " << msg.payload << '\n';
-
-        // Handle message
-        /*
-        if (msg["type"] == "device_info")
-            addDevice(msg["content"]);
-        */
-    }
 }
 
 void Application::handleGui()
@@ -115,10 +102,6 @@ void Application::handleGui()
     if (ImGui::Button(fmt::format("Relay {}", relayOn ? "ON" : "OFF").c_str()))
     {
         relayOn = !relayOn;
-
-        Message msg;
-        msg.payload = fmt::format("Set relay {}", relayOn ? "ON" : "OFF");
-        m_client->send(msg);
     }
     ImGui::End();
 }

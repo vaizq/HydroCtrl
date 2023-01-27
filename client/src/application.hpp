@@ -3,7 +3,6 @@
 
 
 #include "inputsystem.hpp"
-#include "iotnode.hpp"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <string>
@@ -26,7 +25,6 @@ private:
     bool running = true;
     SDL_Window* m_window;
     SDL_Renderer* m_renderer;
-    std::unique_ptr<Client> m_client;
 };
 
 

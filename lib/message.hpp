@@ -1,107 +1,79 @@
-#pragma once
+#ifndef MESSAGE_HPP
+#define MESSAGE_HPP
 
-#include <cereal/types/string.hpp>
-#include <cereal/archives/portable_binary.hpp>
-#include <string>
+#include <iostream>
+#include <iterator>
+#include <vector>
+#include <cstdint>
+#include <cstring>
 #include <sstream>
+#include <cereal/cereal.hpp>
+#include <cereal/archives/portable_binary.hpp>
+#include <cereal/types/string.hpp>
+#include <cassert>
 
-template <typename T>
-static std::string encode(const T& msg)
+#ifdef _WIN32
+#include <winsock.h>
+#elif __linux__
+#include <arpa/inet.h>
+#endif
+
+
+class Message
 {
-    std::stringstream ss;
+public:
+    using Header = uint32_t;
 
+    static constexpr std::size_t headerSize()
     {
-        cereal::PortableBinaryOutputArchive oarchive(ss);
-        oarchive(msg);
-    }
-    return ss.str();
-}
-
-template <typename T>
-static T decode(const std::string& str)
-{
-    std::stringstream ss(str);
-    T msg;
-
-    {
-        cereal::PortableBinaryInputArchive iarchive(ss);
-        iarchive(msg);
+        return sizeof (Header);
     }
 
-    return msg;
-}
-
-
-struct Header
-{
-    uint32_t payloadSize;
-
-    template<class Archive>
-    void serialize(Archive& archive)
+    static std::string encode(const std::string& msg)
     {
-        archive(payloadSize);
+
+        // Serialize payload
+        /*
+        std::stringstream ss;
+        {
+            cereal::PortableBinaryOutputArchive oarchive(ss);
+            oarchive(msg);
+        }
+        */
+
+        auto encodedPayload = msg; // ss.str();
+
+        // Create header
+        uint32_t psize = htonl(static_cast<uint32_t>(encodedPayload.size()));
+        std::string header; header.resize(sizeof psize);
+        std::memcpy(&header[0], &psize, sizeof psize);
+
+        auto encodedMsg = header + encodedPayload;
+
+        return encodedMsg;
     }
 
-    static std::size_t encodedSize()
+    static uint32_t decodeHeader(const std::string& s)
     {
-        static std::size_t size(encode(Header()).size());
-        return size;
+        uint32_t header;
+        std::memcpy(&header, s.data(), sizeof header);
+        return ntohl(header);
+    }
+
+    static std::string decodePayload(const std::string& s)
+    {
+        std::stringstream ss(s);
+        std::string result;
+        {
+            cereal::PortableBinaryInputArchive iarchive(ss);
+            iarchive(result);
+        }
+
+        return result;
     }
 };
 
-struct Message
-{
-    Message() = default;
-    Message(std::string content)
-        : payload(std::move(content))
-    {}
-
-    std::string serialize()
-    {
-        auto msg = encode(*this);
-        Header h;
-        h.payloadSize = msg.size();
-        auto encodedHeader = encode(h);
-
-        return encodedHeader + msg;
-    }
-    
-    std::string payload;
-
-    template<class Archive>
-    void serialize(Archive& archive)
-    {
-        archive(payload);
-    }
- };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif
 

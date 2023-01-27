@@ -1,8 +1,4 @@
-#include "camera.hpp"
-#include "video.hpp"
-#include "ctrldevice.hpp"
-#include "servo.hpp"
-#include <asio.hpp>
+#include "server.hpp"
 #include <iostream>
 #include <string>
 #include <thread>
@@ -12,16 +8,17 @@
 
 int main(int argc, char** argv)
 {
-    if (argc < 4)
+    if (argc < 3)
     {
-        std::cerr << "Usage: " << argv[0] << " video-port control-port control-device" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " listen-port device-name" << std::endl;
         return EXIT_FAILURE;
     }
 
     const auto listenPort = std::atoi(argv[1]);
-    const auto outputAddress = std::atoi(argv[2]);
-    const auto outputPort = argv[3];
+    const auto deviceName = argv[2];
 
+
+    Tcp2SerialProxy(listenPort, deviceName).start();
 }
 
 

@@ -16,7 +16,7 @@ function rebuild {
 
 function run {
     build
-    ./build/app 6969 "127.0.0.1" 7777 
+    ./build/app 6969 "/dev/ttyACM1"
 }
 
 option=$1

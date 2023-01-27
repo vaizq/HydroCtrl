@@ -2,9 +2,14 @@
 #define SERVO_HPP
 
 #include "ctrldevice.hpp"
+#include <nlohmann/json.hpp>
 #include <memory>
 #include <chrono>
 #include <string>
+
+
+using json = nlohmann::json;
+
 
 template <typename T>
 class Servo 
@@ -18,10 +23,12 @@ public:
 
     std::string updateMsg() override
     {
-        std::string msg = "{\nDevice: servo,\n";
-        msg += "pin: " + std::to_string(m_pin) + "\n";
-        msg += "value: " + std::to_string(m_angle) + "\n}";
-        return msg;
+        // Create json representing this servo
+        json j;
+        j["device"] = 1;
+        j["pin"] = m_pin;
+        j["angle"] = m_angle;
+        return j.dump();
     }
 
     void rotate(float angle)

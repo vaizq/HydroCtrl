@@ -51,7 +51,7 @@ private:
                 {
                     if (ec)
                     {
-                        throw std::runtime_error("Failed to read\n");
+                        throw std::runtime_error("Failed to read " + ec.message());
                     }
                     
                     doRead();
@@ -60,10 +60,11 @@ private:
 
     void sendMessage(const std::string& msg)
     {
+
         auto packet = Message::encode(msg);
-    
+
         asio::async_write(m_socket, asio::buffer(packet),
-                [this](const asio::error_code& ec, std::size_t)
+                [this](const asio::error_code& ec, std::size_t bytesSent)
                 {
                     if (ec)
                     {
